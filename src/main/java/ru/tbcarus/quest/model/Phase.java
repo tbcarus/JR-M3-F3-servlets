@@ -1,8 +1,6 @@
 package ru.tbcarus.quest.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 public enum Phase {
