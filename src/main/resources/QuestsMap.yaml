@@ -1,0 +1,4 @@
+questMap:
+  UFO: "C:/projects/JR/Module-3/JR-M3-F3-servlets/src/main/resources/UfoQuest.yaml"
+  SunkenShip: "C:/projects/JR/Module-3/JR-M3-F3-servlets/src/main/resources/SunkenShipQuest.yaml"
+  SpaceStation: "C:/projects/JR/Module-3/JR-M3-F3-servlets/src/main/resources/SpaceStationQuest.yaml"
