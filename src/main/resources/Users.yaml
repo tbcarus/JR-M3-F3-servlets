@@ -1,0 +1,13 @@
+---
+- id: "75d54ab1-e58c-4b12-816f-f5cf7ef8eeb8"
+  login: "first"
+  password: "fitst"
+- id: "6cabd630-f0fa-4922-96c6-9e30c9b51553"
+  login: "tttttt2"
+  password: "qwerty"
+- id: "63840f19-25f6-4985-beca-31b996f8cead"
+  login: "bcrypt"
+  password: "$2a$10$Jae/YFE0LHrXJ6ec3laaL.1bmw.Onfr1M21o5q6rmLWizbgO9L49G"
+- id: "78347303-4f63-48f7-b44b-f9a5ca5c3618"
+  login: "qazwsx"
+  password: "$2a$10$GTNC5oJrcecEykWBdmtoZuZsmBu7sBoRyN8OZN8CbllZCFeioPSoG"
