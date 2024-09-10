@@ -1,7 +1,6 @@
 package ru.tbcarus.quest.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.tbcarus.quest.dao.UserDao;
 import ru.tbcarus.quest.model.User;

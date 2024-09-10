@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.tbcarus.quest.model.User;
 import ru.tbcarus.quest.service.UserService;
@@ -43,5 +44,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         resp.sendRedirect("/start");
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
     }
 }

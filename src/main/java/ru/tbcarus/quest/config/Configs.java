@@ -12,13 +12,10 @@ import java.util.Map;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Configs {
 
     private static Configs configs;
-
-    QuestMapConfig questMapConfig;
-    Map<String, Quest> quests = new HashMap<>();
+    private QuestMapConfig questMapConfig;
 
     private Configs() {}
 
@@ -32,14 +29,4 @@ public class Configs {
         }
         return configs;
     }
-
-    public static Quest getQuest(String questName) {
-        Quest quest = configs.quests.get(questName);
-        if (quest == null) {
-            quest = ConfigReader.readConfig(configs.questMapConfig.getQuestMap().get(questName), Quest.class);
-            configs.quests.put(questName, quest);
-        }
-        return quest;
-    }
-
 }

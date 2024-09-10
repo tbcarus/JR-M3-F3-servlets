@@ -7,7 +7,9 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.tbcarus.quest.dao.QuestDao;
 import ru.tbcarus.quest.dao.UserDao;
+import ru.tbcarus.quest.service.QuestService;
 import ru.tbcarus.quest.service.UserService;
 
 import java.io.File;
@@ -28,5 +30,9 @@ public class InitializationListener implements ServletContextListener {
 //        servletContext.setAttribute("objectMapper", objectMapper);
 
         servletContext.setAttribute("passwordEncoder", new BCryptPasswordEncoder());
+
+        QuestDao questDao = new QuestDao(objectMapper);
+        QuestService questService = new QuestService(questDao);
+        servletContext.setAttribute("questService", questService);
     }
 }
