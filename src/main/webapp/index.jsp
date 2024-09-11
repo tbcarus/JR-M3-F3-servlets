@@ -7,7 +7,14 @@
 <body>
 <h1><%= "Hello World!" %>
 </h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<h3>
+    This is JSP
+</h3>
+<br>
+<a href="start">Start</a>
+<br>
+<a href="registration">Регистрация</a>
+<br>
+<a href="login">Login</a>
 </body>
 </html>
