@@ -32,8 +32,6 @@ public class QuestServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String questName = request.getParameter("questName");
-        Quest quest = Configs.getQuest(questName);
-
 
         response.sendRedirect("quest?stageN=0");
     }
