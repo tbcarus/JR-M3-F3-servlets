@@ -30,4 +30,8 @@ public class UserService {
                 .filter(u -> passwordEncoder.matches(password, u.getPassword()))
                 .findFirst().orElse(null);
     }
+
+    public void deleteUser(User user) {
+        userDao.deleteUser(user);
+    }
 }

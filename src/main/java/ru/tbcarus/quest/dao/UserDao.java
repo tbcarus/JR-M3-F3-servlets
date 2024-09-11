@@ -30,6 +30,14 @@ public class UserDao {
         }
     }
 
+    public void replaceAllUsers(List<User> users) {
+        try {
+            objectMapper.writeValue(file, users);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<User> getUsers() {
         List<User> users = null;
 
@@ -44,4 +52,20 @@ public class UserDao {
 
         return users;
     }
+
+    public User getUserByLogin(String login) {
+        List<User> users = getUsers();
+        return users.stream().filter(u -> u.getLogin().equals(login)).findFirst().orElse(null);
+    }
+
+    public void deleteUser(User user) {
+        List<User> users = getUsers();
+        users.remove(user);
+        try {
+            objectMapper.writeValue(file, users);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
