@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.tbcarus.quest.model.User;
 import ru.tbcarus.quest.service.UserService;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @WebServlet(urlPatterns = "/registration")
-@RequiredArgsConstructor
 public class RegistrationServlet extends HttpServlet {
 
     private UserService userService;

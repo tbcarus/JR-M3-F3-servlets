@@ -22,11 +22,24 @@
                 <input type="text" name="login">
             </label>
         </div>
+
+        <c:forEach var="lerr" items="${errors}">
+            <jsp:useBean id="lerr" type="ru.tbcarus.quest.model.ErrorMessage"/>
+            <c:if test="${lerr.name == 'login'}">
+                <p style="color: red">${lerr.message}</p>
+            </c:if>
+        </c:forEach>
         <div>
             <label>Пароль:
                 <input type="text" name="password">
             </label>
         </div>
+        <c:forEach var="perr" items="${errors}">
+            <jsp:useBean id="perr" type="ru.tbcarus.quest.model.ErrorMessage"/>
+            <c:if test="${perr.name == 'password'}">
+                <p style="color: red">${perr.message}</p>
+            </c:if>
+        </c:forEach>
         <div>
             <button type="submit">Отправить</button>
         </div>

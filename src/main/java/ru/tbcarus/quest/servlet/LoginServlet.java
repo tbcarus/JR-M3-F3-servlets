@@ -13,19 +13,17 @@ import ru.tbcarus.quest.model.User;
 import ru.tbcarus.quest.service.UserService;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     private UserService userService;
-    private BCryptPasswordEncoder passwordEncoder;
-
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = getServletContext();
         userService = (UserService) servletContext.getAttribute("userService");
-        passwordEncoder = (BCryptPasswordEncoder) servletContext.getAttribute("passwordEncoder");
     }
 
     @Override
@@ -38,13 +36,13 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        User user = userService.getUser(login, password);
-        if (user == null) {
+        Optional<User> user = userService.getUser(login, password);
+        if (user.isEmpty()) {
             resp.sendRedirect("/login");
             return;
         }
         resp.sendRedirect("/start");
         HttpSession session = req.getSession();
-        session.setAttribute("user", user);
+        session.setAttribute("user", user.get());
     }
 }

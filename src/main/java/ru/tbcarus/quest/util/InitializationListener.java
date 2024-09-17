@@ -11,8 +11,12 @@ import ru.tbcarus.quest.dao.QuestDao;
 import ru.tbcarus.quest.dao.UserDao;
 import ru.tbcarus.quest.service.QuestService;
 import ru.tbcarus.quest.service.UserService;
+import ru.tbcarus.quest.service.validation.LoginValidationExecutor;
+import ru.tbcarus.quest.service.validation.LoginValidator;
+import ru.tbcarus.quest.service.validation.PasswordValidator;
 
 import java.io.File;
+import java.util.List;
 
 @WebListener
 public class InitializationListener implements ServletContextListener {
@@ -27,12 +31,19 @@ public class InitializationListener implements ServletContextListener {
         UserService userService = new UserService(userDao, new BCryptPasswordEncoder());
 
         servletContext.setAttribute("userService", userService);
-//        servletContext.setAttribute("objectMapper", objectMapper);
 
         servletContext.setAttribute("passwordEncoder", new BCryptPasswordEncoder());
 
         QuestDao questDao = new QuestDao(objectMapper);
         QuestService questService = new QuestService(questDao);
         servletContext.setAttribute("questService", questService);
+
+        LoginValidator loginValidator = new LoginValidator(userService);
+        servletContext.setAttribute("loginValidator", loginValidator);
+        PasswordValidator passwordValidator = new PasswordValidator();
+        servletContext.setAttribute("passwordValidator", passwordValidator);
+
+        LoginValidationExecutor loginValidationExecutor = new LoginValidationExecutor(List.of(loginValidator, passwordValidator));
+        servletContext.setAttribute("loginValidationExecutor", loginValidationExecutor);
     }
 }
