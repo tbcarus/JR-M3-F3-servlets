@@ -8,14 +8,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.tbcarus.quest.model.User;
 import ru.tbcarus.quest.service.UserService;
+import ru.tbcarus.quest.util.Constants;
 
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = Constants.PATH_LOGIN)
 public class LoginServlet extends HttpServlet {
     private UserService userService;
 
@@ -23,26 +23,26 @@ public class LoginServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = getServletContext();
-        userService = (UserService) servletContext.getAttribute("userService");
+        userService = (UserService) servletContext.getAttribute(Constants.USER_SERVICE);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        req.getRequestDispatcher(Constants.VIEW_LOGIN).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = req.getParameter(Constants.LOGIN);
+        String password = req.getParameter(Constants.PASSWORD);
 
         Optional<User> user = userService.getUser(login, password);
         if (user.isEmpty()) {
-            resp.sendRedirect("/login");
+            resp.sendRedirect(Constants.PATH_LOGIN);
             return;
         }
-        resp.sendRedirect("/start");
+        resp.sendRedirect(Constants.PATH_START);
         HttpSession session = req.getSession();
-        session.setAttribute("user", user.get());
+        session.setAttribute(Constants.USER, user.get());
     }
 }

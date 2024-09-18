@@ -11,10 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import ru.tbcarus.quest.model.User;
 import ru.tbcarus.quest.service.UserService;
+import ru.tbcarus.quest.util.Constants;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/ban")
+@WebServlet(urlPatterns = Constants.PATH_BAN)
 @RequiredArgsConstructor
 public class BanServlet extends HttpServlet {
 
@@ -24,15 +25,15 @@ public class BanServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = getServletContext();
-        userService = (UserService) servletContext.getAttribute("userService");
+        userService = (UserService) servletContext.getAttribute(Constants.USER_SERVICE);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(Constants.USER);
         session.invalidate();
         userService.deleteUser(user);
-        req.getRequestDispatcher("ban.jsp").forward(req, resp);
+        req.getRequestDispatcher(Constants.VIEW_BAN).forward(req, resp);
     }
 }

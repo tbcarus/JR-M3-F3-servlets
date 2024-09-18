@@ -6,43 +6,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import ru.tbcarus.quest.config.Configs;
 import ru.tbcarus.quest.model.Quest;
 import ru.tbcarus.quest.model.Stage;
+import ru.tbcarus.quest.util.Constants;
 
 import java.io.IOException;
 
-@WebServlet(name = "questServlet", value = "/quest")
+@WebServlet(name = "questServlet", value = Constants.PATH_QUEST)
 public class QuestServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        Quest quest = (Quest) session.getAttribute("quest");
-        int verStageId = (int) session.getAttribute("verStageId");
-        int stageId = Integer.parseInt(request.getParameter("stageId"));
+        Quest quest = (Quest) session.getAttribute(Constants.QUEST);
+        int stageId = Integer.parseInt(request.getParameter(Constants.STAGE_ID));
         Stage stage = quest.getStage(stageId);
 
-        request.setAttribute("intro", quest.getStory());
-        request.setAttribute("questName", quest.getName());
-        request.setAttribute("stage", stage);
-        session.setAttribute("verStageId", stageId);
+        request.setAttribute(Constants.INTRO, quest.getStory());
+        request.setAttribute(Constants.QUEST_NAME, quest.getName());
+        request.setAttribute(Constants.STAGE, stage);
+        session.setAttribute(Constants.CURRENT_STAGE_ID, stageId);
 
-        request.getRequestDispatcher("quest.jsp").forward(request, response);
+        request.getRequestDispatcher(Constants.VIEW_QUEST).forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String questName = request.getParameter("questName");
 
-        response.sendRedirect("quest?stageN=0");
-    }
-
-    public boolean checkCheat(Quest quest, int verStageId, int stageId) {
-        /* true, если
-        1. verStageId = stageId = 0
-        2. У текущей стадии с ID verStageId есть потомки с ID stageId
-         */
-
-
-        return true;
     }
 }

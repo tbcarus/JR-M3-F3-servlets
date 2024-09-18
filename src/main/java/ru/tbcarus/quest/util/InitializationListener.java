@@ -30,20 +30,20 @@ public class InitializationListener implements ServletContextListener {
         UserDao userDao = new UserDao(objectMapper, file);
         UserService userService = new UserService(userDao, new BCryptPasswordEncoder());
 
-        servletContext.setAttribute("userService", userService);
+        servletContext.setAttribute(Constants.USER_SERVICE, userService);
 
-        servletContext.setAttribute("passwordEncoder", new BCryptPasswordEncoder());
+        servletContext.setAttribute(Constants.PASSWORD_ENCODER, new BCryptPasswordEncoder());
 
         QuestDao questDao = new QuestDao(objectMapper);
         QuestService questService = new QuestService(questDao);
-        servletContext.setAttribute("questService", questService);
+        servletContext.setAttribute(Constants.QUEST_SERVICE, questService);
 
         LoginValidator loginValidator = new LoginValidator(userService);
-        servletContext.setAttribute("loginValidator", loginValidator);
+        servletContext.setAttribute(Constants.LOGIN_VALIDATOR, loginValidator);
         PasswordValidator passwordValidator = new PasswordValidator();
-        servletContext.setAttribute("passwordValidator", passwordValidator);
+        servletContext.setAttribute(Constants.PASSWORD_VALIDATOR, passwordValidator);
 
         LoginValidationExecutor loginValidationExecutor = new LoginValidationExecutor(List.of(loginValidator, passwordValidator));
-        servletContext.setAttribute("loginValidationExecutor", loginValidationExecutor);
+        servletContext.setAttribute(Constants.LOGIN_VALIDATION_EXECUTOR, loginValidationExecutor);
     }
 }
