@@ -1,0 +1,10 @@
+---
+- id: "874d8c00-84b6-4112-8095-71c7d4a0257a"
+  login: "User1"
+  password: "$2a$10$761H.Oblg1kK54ykE.CQf./CfAafU1TPQeLVJXMK0GvexLEGSSqT2"
+- id: "66894587-3792-4a56-8b85-71388fd3d16c"
+  login: "User2"
+  password: "$2a$10$w50Ykkrl4Y6Rjc4gdt9VDeSVXbMIegJt2dWFDhse5XUBCiVgCj6D6"
+- id: "76dd5369-234e-4ede-b13c-62ed8492dc94"
+  login: "User3"
+  password: "$2a$10$vrXaxMvbEAoluyljQb4o8O9FNhsDmD.fc.41Lc5WJSL5wT42FSM.m"

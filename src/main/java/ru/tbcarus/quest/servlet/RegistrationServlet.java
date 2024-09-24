@@ -19,7 +19,6 @@ import java.util.UUID;
 public class RegistrationServlet extends HttpServlet {
 
     private UserService userService;
-    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -27,7 +26,6 @@ public class RegistrationServlet extends HttpServlet {
         super.init(config);
         ServletContext servletContext = getServletContext();
         userService = (UserService) servletContext.getAttribute(Constants.USER_SERVICE);
-        passwordEncoder = (BCryptPasswordEncoder) servletContext.getAttribute(Constants.PASSWORD_ENCODER);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter(Constants.LOGIN);
         String password = req.getParameter(Constants.PASSWORD);
-        User user = new User(UUID.randomUUID(), login, passwordEncoder.encode(password));
+        User user = new User(UUID.randomUUID(), login, password);
         userService.saveUser(user);
 
         resp.sendRedirect(Constants.PATH_LOGIN);

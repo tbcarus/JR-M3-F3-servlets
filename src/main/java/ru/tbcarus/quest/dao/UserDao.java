@@ -68,4 +68,12 @@ public class UserDao {
         }
     }
 
+    public void deleteAllUsers() {
+        List<User> emptyList = new ArrayList<>();
+        try {
+            objectMapper.writeValue(file, emptyList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

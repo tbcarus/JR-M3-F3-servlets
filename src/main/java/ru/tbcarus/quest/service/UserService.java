@@ -16,7 +16,13 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void saveUser(User user) {
-        userDao.save(user);
+        User savedUser = new User(user);
+        savedUser.setPassword(passwordEncoder.encode(savedUser.getPassword()));
+        userDao.save(savedUser);
+    }
+
+    public void saveAllUsers(List<User> users) {
+        users.forEach(this::saveUser);
     }
 
     public List<User> getUsers() {
@@ -34,6 +40,10 @@ public class UserService {
 
     public void deleteUser(User user) {
         userDao.deleteUser(user);
+    }
+
+    public void deleteAllUsers() {
+        userDao.deleteAllUsers();
     }
 
     public boolean isExist(String login) {
